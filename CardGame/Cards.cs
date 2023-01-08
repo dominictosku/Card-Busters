@@ -49,7 +49,7 @@ namespace CardGame
         }
         public void ShowOutput()
         {
-            Console.WriteLine("ID is {0} and Health and Attack ist: {1} {2}",
+            Console.WriteLine("ID is {0} and Health and Attack is: {1} {2}",
                             this.ID,
                             this.Health,
                             this.Attack);

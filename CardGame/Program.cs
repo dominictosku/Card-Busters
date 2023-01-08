@@ -26,10 +26,11 @@ namespace CardGame
             enemy.ActiveCard = enemy.Cards[0];
             // Start the Game
             Battle battle = new Battle(player, enemy);
-            battle.InterimResult;
+            battle.InterimResult();
             Console.WriteLine("---------------------------------------------");
             player.Cards[0].attackEnemy(enemy.ActiveCard);
             enemy.ActiveCard.attackEnemy(player.ActiveCard);
+            battle.InterimResult();
             Console.ReadKey();
         }
     }
