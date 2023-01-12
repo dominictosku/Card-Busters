@@ -204,8 +204,13 @@ namespace CardGame
             Console.WriteLine("{0} damage dealt", receivedDamage);
             Health -= receivedDamage;
         }
+        /// <summary>
+        /// Removes card from list and destroys it
+        /// </summary>
         public void DestroyCard()
         {
+            //Todo! Remove card from List
+            Health = 0;
             Console.WriteLine("Card Destroyed");
         }
     }
