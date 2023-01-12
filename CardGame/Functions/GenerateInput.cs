@@ -33,7 +33,7 @@ namespace CardGame.Functions
                 {
                     Console.WriteLine("{0}: {1}", i + 1, selection[i]);
                 }
-                action = Console.ReadKey().KeyChar;
+                action = Console.ReadKey(true).KeyChar;
                 invalid = true;
             } while (!validInput.Any(x => x.Equals(action)));
             return action;
