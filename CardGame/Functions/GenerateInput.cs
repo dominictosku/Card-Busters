@@ -19,7 +19,7 @@ namespace CardGame.Functions
             bool invalid = false;
             char action;
             byte selectionLength = Convert.ToByte(selection.Length);
-            char[] validInput = new char[4] { '1', '2', '3', '4' };
+            char[] validInput = new char[] {'1','2','3','4'};
             Console.WriteLine(PlayerInitiate.Line);
             do
             {

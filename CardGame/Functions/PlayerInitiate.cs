@@ -35,10 +35,9 @@ namespace CardGame.Functions
         public static List<Cards> SelectCards() {
             List<Cards> deck;
             Cards selectedCard;
-            char element;
-            char role;
-            string[] selection = new string[4] { "Pyro", "Hydro", "Anemo", "Geo" };
-            string[] selection2 = new string[4] { "Attacker", "Healer", "Support", "Tank" };
+            char element, role;
+            string[] selection = new string[4] { "Pyro", "Hydro", "Anemo", "Geo" }, 
+                     selection2 = new string[4] { "Attacker", "Healer", "Support", "Tank" };
             string textoutput = "element";
             string textoutput2 = "role";
             Console.WriteLine("Please choose 1 card you wish to have in your Deck");
