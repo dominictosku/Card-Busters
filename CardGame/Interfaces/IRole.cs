@@ -10,7 +10,11 @@ namespace CardGame
     {
         //Adjusts properties for respective role
         void SetRolleStats(Cards C);
-        //Acitvaes role exclusive ability
+        /// <summary>
+        /// Executes Specific role ability
+        /// </summary>
+        /// <param name="C">Player card</param>
+        /// <param name="E">Enemy card</param>
         void SpecialAbility(Cards C, Cards E);
     }
 }

@@ -11,6 +11,10 @@ namespace CardGame.Functions
     public static class PlayerInitiate
     {
         public const string Line = "----------------------";
+        /// <summary>
+        /// Creates a new Player
+        /// </summary>
+        /// <returns>Player name</returns>
         public static string CreateCharacter()
         {
             string playerName;
@@ -32,6 +36,10 @@ namespace CardGame.Functions
             Console.WriteLine(Line);
             return playerName;
         }
+        /// <summary>
+        /// Creates a card from player input
+        /// </summary>
+        /// <returns> List with choosen Card and 3 random cards</returns>
         public static List<Cards> SelectCards() {
             List<Cards> deck;
             Cards selectedCard;
