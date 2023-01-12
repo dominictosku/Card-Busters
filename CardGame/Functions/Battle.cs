@@ -104,11 +104,28 @@ namespace CardGame.Functions
         /// </summary>
         public void Round()
         {
+            string winnerText = string.Empty;
+            byte counter = 0;
             Console.WriteLine(PlayerInitiate.Line);
             Console.WriteLine("The battle begins");
-            PlayerInput();
+            while (Player.ActiveCard.Health > 0 && Enemy.ActiveCard.Health > 0)
+            {
+                PlayerInput();
+                Console.WriteLine(PlayerInitiate.Line);
+                EnemyInput();
+                counter++;
+                // Prompt to exit the game if it takes to long
+                if (counter % 10 == 0){
+                    Console.WriteLine(PlayerInitiate.Line);
+                    Console.WriteLine("Do you want to exit?");
+                    Console.WriteLine("Press y, else any other key");
+                    char userContinue = Console.ReadKey(true).KeyChar;
+                    if (userContinue == 'y')
+                        break;
+                }
+            }
             Console.WriteLine(PlayerInitiate.Line);
-            EnemyInput();
+            Console.WriteLine("round over");
         }
     }
 }
