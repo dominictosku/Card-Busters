@@ -27,8 +27,8 @@ namespace CardGame
             // Start the Game
             Battle battle = new Battle(player, enemy);
             battle.InterimResult();
-            battle.round();
-            Console.WriteLine("---------------------------------------------");
+            battle.Round();
+            Console.WriteLine(PlayerInitiate.Line);
             player.ActiveCard.AttackEnemy(enemy.ActiveCard);
             enemy.ActiveCard.AttackEnemy(player.ActiveCard);
             battle.InterimResult();

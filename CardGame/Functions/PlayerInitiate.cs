@@ -54,7 +54,6 @@ namespace CardGame.Functions
             role = GenerateInput.PlayerInput(selection2, textoutput2);
             selectedCard = GenerateCard.CreateCard(element,role);
             Console.WriteLine("Generating 3 random extra Cards");
-            Thread.Sleep(3000);
             deck = CreateDeck.GenerateRandomDeck(3);
             deck.Add(selectedCard);
             return deck;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace CardGame.Functions
 {
@@ -28,66 +29,86 @@ namespace CardGame.Functions
         /// <summary>
         /// Indicates player turn
         /// </summary>
-        public void playerInput()
+        public void PlayerInput()
         {
             char action;
             string[] actions = new string[] {"Normal attack", "Elemental attack", "Role ability", "Show Status" };
             Console.WriteLine("Your turn: ");
             action = GenerateInput.PlayerInput(actions, "action");
-            turn(action);
+            Turn(action, false);
         }
         /// <summary>
         /// Indicates enemy turn
         /// </summary>
-        public void enemyInput()
+        public void EnemyInput()
         {
-            Enemy.ActiveCard.AttackEnemy(Player.ActiveCard);
-            // Todo! switch function to be operational for enemy and player
-            //turn('1');
+            Console.WriteLine("Enemy turn");
+            Turn('1', true);
 
         }
         /// <summary>
         /// Actions to be executed
         /// </summary>
         /// <param name="action">char indicating action, ranges from 1 to 4</param>
-        public void turn(char action)
+        /// <param name="actor">bool indicating actor, 0 for player, 1 for bot</param>
+        public void Turn(char action, bool actor)
         {
-            Cards playerActive = Player.ActiveCard;
-            Cards enemyActive = Enemy.ActiveCard;
+            Cards ownCard;
+            Cards opponentCard;
+            string actorInfo;
+            string attackInfo;
+            switch (actor)
+            {
+                case false:
+                    actorInfo = "You";
+                    attackInfo = "use:";
+                    ownCard = Player.ActiveCard;
+                    opponentCard = Enemy.ActiveCard;
+                    break;
+                case true:
+                    actorInfo = "Opponent";
+                    attackInfo = "uses";
+                    ownCard = Enemy.ActiveCard;
+                    opponentCard= Player.ActiveCard;
+                    break;
+                default:
+                    throw new InvalidOperationException("I don't know how, but you completly broke the game. Bool can't be null");
+            }
             switch (action)
             {
                 case '1':
-                    Console.WriteLine("You use a normal attck");
-                    playerActive.AttackEnemy(enemyActive);
+                    Console.WriteLine("{0} {1} normal attack", actorInfo, attackInfo);
+                    ownCard.AttackEnemy(opponentCard);
                     break;
                 case '2':
-                    Console.WriteLine("You use an elemental attck");
-                    playerActive.ElementalAttack(enemyActive);
+                    Console.WriteLine("{0} {1} elemental attck", actorInfo, attackInfo);
+                    ownCard.ElementalAttack(opponentCard);
                     break;
                 case '3':
-                    Console.WriteLine("You use your special ability");
-                    playerActive.Role.SpecialAbility(playerActive, enemyActive);
+                    Console.WriteLine("{0} {1} special ability", actorInfo, attackInfo);
+                    ownCard.Role.SpecialAbility(ownCard, opponentCard);
                     break;
                 case '4':
                     Console.WriteLine("Showing stats");
                     InterimResult();
-                    playerInput();
+                    PlayerInput();
                     break;
                 default:
                     Console.WriteLine("Unexpected input, try again");
-                    playerInput();
+                    PlayerInput();
                     break;
             }
         }
         /// <summary>
         /// main function of battle
         /// </summary>
-        public void round()
+        public void Round()
         {
+            Console.WriteLine(PlayerInitiate.Line);
             Console.WriteLine("The battle begins");
-            playerInput();
-            Console.WriteLine("Enemy turn");
-            enemyInput();
+            PlayerInput();
+            Console.WriteLine(PlayerInitiate.Line);
+            EnemyInput();
         }
     }
 }

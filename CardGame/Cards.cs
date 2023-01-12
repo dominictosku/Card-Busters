@@ -200,6 +200,7 @@ namespace CardGame
                     break;
             }
             int receivedDamage = Convert.ToInt32(Damage / DefenseMult);
+            Console.WriteLine("{0} damage dealt", receivedDamage);
             Health -= receivedDamage;
         }
         public void DestroyCard()
