@@ -25,11 +25,12 @@ namespace CardGame
             IdIncrease += 1;
             Role = role;
             AppliedEffects = new List<StatusEffect> { };
+            Role.SetRolleStats(this);
         }
         // Multiplies damage dealt to opponent
-        public static float DamageMult { get; set; }
+        public float DamageMult { get; set; }
         // Reduces damage taken by opponent
-        public static float DefenseMult { get; set; }
+        public float DefenseMult { get; set; }
         // Health of the card
         private int health;
         // How much damage is dealt by default

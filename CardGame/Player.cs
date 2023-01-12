@@ -11,6 +11,10 @@ namespace CardGame
         public string Name { get; set; }
         public List<Cards> Cards { get; set; }
         private Cards _activeCard;
+        /// <summary>
+        /// The card which can perfom attacks
+        /// only 1 card can be active at a time per player
+        /// </summary>
         public Cards ActiveCard {
             get { return _activeCard; }
             set { if(Cards.Contains(value))

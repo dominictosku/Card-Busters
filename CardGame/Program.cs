@@ -28,9 +28,8 @@ namespace CardGame
             Battle battle = new Battle(player, enemy);
             battle.InterimResult();
             battle.Round();
+            // Write a long line
             Console.WriteLine(PlayerInitiate.Line);
-            player.ActiveCard.AttackEnemy(enemy.ActiveCard);
-            enemy.ActiveCard.AttackEnemy(player.ActiveCard);
             battle.InterimResult();
             Console.ReadKey();
         }
