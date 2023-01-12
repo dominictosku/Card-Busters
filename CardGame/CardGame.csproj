@@ -53,6 +53,7 @@
     <Compile Include="Functions\Battle.cs" />
     <Compile Include="Functions\CreateDeck.cs" />
     <Compile Include="Functions\GenerateCard.cs" />
+    <Compile Include="Functions\GenerateInput.cs" />
     <Compile Include="Functions\PlayerInitiate.cs" />
     <Compile Include="Functions\StatIncrease.cs" />
     <Compile Include="Interfaces\INonElementalCard.cs" />

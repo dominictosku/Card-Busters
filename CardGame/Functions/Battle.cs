@@ -22,6 +22,10 @@ namespace CardGame.Functions
             Console.Write("EnemyCard ");
             Enemy.ActiveCard.ShowOutput();
         }
+        public void playerInput()
+        {
+            
+        }
         public void round()
         {
 
