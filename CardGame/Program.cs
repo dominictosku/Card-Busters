@@ -19,7 +19,7 @@ namespace CardGame
             // Configure properties for Player
             player.Name = PlayerInitiate.CreateCharacter();
             player.Cards = PlayerInitiate.SelectCards();
-            player.ActiveCard = player.Cards[0];
+            player.ActiveCard = player.Cards[3];
             // Configure properties for enemy
             enemy.Name = "Bot";
             enemy.Cards = CreateDeck.GenerateRandomDeck(4);
