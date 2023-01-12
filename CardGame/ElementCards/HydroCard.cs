@@ -9,5 +9,14 @@ namespace CardGame.ElementCards
     public class HydroCard : Cards
     {
         public HydroCard(IRole role) : base(role) { }
+        /// <summary>
+        /// Applies wet to enemy and deals 2 bonus damage
+        /// </summary>
+        /// <param name="E"></param>
+        public override void ElementalAttack(Cards E)
+        {
+            E.AppliedEffects.Add(StatusEffect.Wet);
+            AttackEnemy(E, 2);
+        }
     }
 }

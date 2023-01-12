@@ -28,8 +28,8 @@ namespace CardGame
             Battle battle = new Battle(player, enemy);
             battle.InterimResult();
             Console.WriteLine("---------------------------------------------");
-            player.Cards[0].attackEnemy(enemy.ActiveCard);
-            enemy.ActiveCard.attackEnemy(player.ActiveCard);
+            player.ActiveCard.AttackEnemy(enemy.ActiveCard);
+            enemy.ActiveCard.AttackEnemy(player.ActiveCard);
             battle.InterimResult();
             Console.ReadKey();
         }

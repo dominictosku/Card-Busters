@@ -1,4 +1,5 @@
-﻿using CardGame.Roles;
+﻿using CardGame.ElementCards;
+using CardGame.Roles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace CardGame
             ID = IdIncrease;
             IdIncrease += 1;
             Role = role;
+            AppliedEffects = new List<StatusEffect> { };
         }
         // Multiplies damage dealt to opponent
         public static float DamageMult { get; set; }
@@ -32,6 +34,7 @@ namespace CardGame
         private int health;
         // How much damage is dealt by default
         private int attack;
+        private List<StatusEffect> appliedEffects;
         // If health reaches 0 or below, destroys the card
         public int Health
         {
@@ -72,7 +75,15 @@ namespace CardGame
 
         }
         // Effects applied to card for specific duration
-        public List<StatusEffect> AppliedEffects { get; set; }
+        public List<StatusEffect> AppliedEffects { 
+            get { return appliedEffects; } 
+            set {
+                // Check if statuseffect is already applied
+                if(value.Count != value.Distinct().Count())
+                    return;
+                appliedEffects = value;
+            }
+        }
         /// <summary>
         /// Writes the current state of the card
         /// </summary>
@@ -87,26 +98,95 @@ namespace CardGame
         /// Takes the attack property and increases it based on multipliers
         /// </summary>
         /// <returns> Final attack value</returns>
-        public int attackValue() {
+        public int AttackValue() {
             int attackValue = Convert.ToInt32(Attack * DamageMult);
             return attackValue;
         }
         /// <summary>
-        /// Atacks the opponent
+        /// Performs a special attack, based on element
+        /// </summary>
+        public abstract void ElementalAttack(Cards E);
+        /// <summary>
+        /// Compares type of player and enemy card, increases damage accordingly
+        /// </summary>
+        /// <param name="E"></param>
+        /// <returns></returns>
+        public ElementalAdvantage calculateElementalAdvantage(Cards E) {
+            Type playerType = GetType();
+            switch (E)
+            {
+                case PyroCard _:
+                    if(playerType == typeof(HydroCard))
+                    {
+                        return ElementalAdvantage.Advantage;
+                    } else if(playerType == typeof(AnemoCard))
+                    {
+                        return ElementalAdvantage.Disadvantage;
+                    }
+                    else
+                    {
+                        return ElementalAdvantage.Neutral;
+                    }
+                case HydroCard _:
+                    if (playerType == typeof(AnemoCard))
+                    {
+                        return ElementalAdvantage.Advantage;
+                    }
+                    else if (playerType == typeof(PyroCard))
+                    {
+                        return ElementalAdvantage.Disadvantage;
+                    }
+                    else
+                    {
+                        return ElementalAdvantage.Neutral;
+                    }
+                case GeoCard _:
+                    if (playerType == typeof(HydroCard))
+                    {
+                        return ElementalAdvantage.Advantage;
+                    }
+                    else if (playerType == typeof(AnemoCard))
+                    {
+                        return ElementalAdvantage.Disadvantage;
+                    }
+                    else
+                    {
+                        return ElementalAdvantage.Neutral;
+                    }
+                case AnemoCard _:
+                    if (playerType == typeof(GeoCard))
+                    {
+                        return ElementalAdvantage.Advantage;
+                    }
+                    else if (playerType == typeof(HydroCard))
+                    {
+                        return ElementalAdvantage.Disadvantage;
+                    }
+                    else
+                    {
+                        return ElementalAdvantage.Neutral;
+                    }
+                default:
+                    return ElementalAdvantage.Neutral;
+            }
+        }
+        /// <summary>
+        /// Attacks the opponent
         /// </summary>
         /// <param name="E"> The opponent card</param>
-        public void attackEnemy(Cards E)
+        public void AttackEnemy(Cards E, int? bonusDamage = 0)
         {
-            ElementalAdvantage elementalAdvantage = new ElementalAdvantage();
+            int attackValue = AttackValue() + bonusDamage ?? 0;
+            ElementalAdvantage elementalAdvantage = calculateElementalAdvantage(E);
             elementalAdvantage = ElementalAdvantage.Neutral;
-            E.receiveDamage(attackValue(),elementalAdvantage);
+            E.ReceiveDamage(attackValue, elementalAdvantage);
         }
         /// <summary>
         /// Take damage based on attack value of opponent and elemental advantage
         /// </summary>
         /// <param name="Damage">Attack value to be taken from health</param>
         /// <param name="Element"> Elemental advantage</param>
-        public void receiveDamage(float Damage, ElementalAdvantage Element)
+        public void ReceiveDamage(float Damage, ElementalAdvantage Element)
         {
             switch(Element)
             {
