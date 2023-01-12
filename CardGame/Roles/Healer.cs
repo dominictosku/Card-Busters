@@ -15,7 +15,7 @@ namespace CardGame.Roles
         public void SetRolleStats(Cards C)
         {
             C.Health += 500;
-            C.Attack-= 500;
+            C.Attack-= 40;
         }
         /// <summary>
         /// Restores Health for a card and reduces defense of enemy
