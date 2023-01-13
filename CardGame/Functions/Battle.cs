@@ -29,7 +29,7 @@ namespace CardGame.Functions
         /// <summary>
         /// Indicates player turn
         /// </summary>
-        public void PlayerInput()
+        private void PlayerInput()
         {
             char action;
             string[] actions = new string[] {"Normal attack", "Elemental attack", "Role ability", "Show Status" };
@@ -40,7 +40,7 @@ namespace CardGame.Functions
         /// <summary>
         /// Indicates enemy turn
         /// </summary>
-        public void EnemyInput()
+        private void EnemyInput()
         {
             Console.WriteLine("Enemy turn");
             Turn('1', true);
@@ -51,12 +51,13 @@ namespace CardGame.Functions
         /// </summary>
         /// <param name="action">char indicating action, ranges from 1 to 4</param>
         /// <param name="actor">bool indicating actor, 0 for player, 1 for bot</param>
-        public void Turn(char action, bool actor)
+        private void Turn(char action, bool actor)
         {
             Cards ownCard;
             Cards opponentCard;
             string actorInfo;
             string attackInfo;
+            // Checkss which actor is calling this function
             switch (actor)
             {
                 case false:
@@ -74,6 +75,7 @@ namespace CardGame.Functions
                 default:
                     throw new InvalidOperationException("I don't know how, but you completly broke the game. Bool can't be null");
             }
+            // Selection of commands
             switch (action)
             {
                 case '1':
@@ -100,14 +102,15 @@ namespace CardGame.Functions
             }
         }
         /// <summary>
-        /// main function of battle
+        /// Main function of battle
+        /// Controls the fight
         /// </summary>
         public void Round()
         {
-            string winnerText = string.Empty;
             byte counter = 0;
             Console.WriteLine(PlayerInitiate.Line);
             Console.WriteLine("The battle begins");
+            // Round continues until one card is destroyed
             while (Player.ActiveCard.Health > 0 && Enemy.ActiveCard.Health > 0)
             {
                 PlayerInput();
@@ -124,6 +127,7 @@ namespace CardGame.Functions
                         break;
                 }
             }
+            //Todo! Text who won
             Console.WriteLine(PlayerInitiate.Line);
             Console.WriteLine("round over");
         }
