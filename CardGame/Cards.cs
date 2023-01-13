@@ -27,14 +27,34 @@ namespace CardGame
             AppliedEffects = new List<StatusEffect> { };
             Role.SetRolleStats(this);
         }
-        // Multiplies damage dealt to opponent
-        public float DamageMult { get; set; }
-        // Reduces damage taken by opponent
-        public float DefenseMult { get; set; }
+        private float damageMult;
+        private float defenseMult;
         // Health of the card
         private int health;
         // How much damage is dealt by default
         private int attack;
+        // Multiplies damage dealt to opponent
+        public float DamageMult { 
+            get { return damageMult; }
+            set {
+                if(value >= 0.25F)
+                    damageMult = value;
+            }
+        }
+        // Reduces damage taken by opponent
+        public float DefenseMult {
+            get { return defenseMult; }
+            set
+            {
+                if (value >= 1.0F) // Todo! Breaks the game if under 1
+                {
+                    defenseMult = value;
+                    return;
+                }
+                defenseMult = 1.0F; // Todo! Remove, Set default value
+
+            }
+        }
         private List<StatusEffect> appliedEffects;
         // If health reaches 0 or below, destroys the card
         public int Health
