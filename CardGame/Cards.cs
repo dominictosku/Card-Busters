@@ -52,7 +52,7 @@ namespace CardGame
         }
         public int Attack { get { return attack; } set { attack = value; } }
         // Increases id by 1 for every new card created
-        public static int IdIncrease { get; set; }
+        private static int IdIncrease { get; set; }
         // Id of Card
         public int ID { get; set; }
         // Assigns unique abilities to the card
@@ -91,15 +91,15 @@ namespace CardGame
         public void ShowOutput()
         {
             Console.WriteLine("ID is {0} and Health and Attack is: {1} {2}",
-                            this.ID,
-                            this.Health,
-                            this.Attack);
+                            ID,
+                            Health,
+                            Attack);
         }
         /// <summary>
         /// Takes the attack property and increases it based on multipliers
         /// </summary>
         /// <returns> Final attack value</returns>
-        public int AttackValue() {
+        private int AttackValue() {
             int attackValue = Convert.ToInt32(Attack * DamageMult);
             return attackValue;
         }
@@ -112,7 +112,7 @@ namespace CardGame
         /// </summary>
         /// <param name="E"></param>
         /// <returns></returns>
-        public ElementalAdvantage calculateElementalAdvantage(Cards E) {
+        private ElementalAdvantage calculateElementalAdvantage(Cards E) {
             Type playerType = GetType();
             switch (E)
             {
@@ -187,7 +187,7 @@ namespace CardGame
         /// </summary>
         /// <param name="Damage">Attack value to be taken from health</param>
         /// <param name="Element"> Elemental advantage</param>
-        public void ReceiveDamage(float Damage, ElementalAdvantage Element)
+        private void ReceiveDamage(float Damage, ElementalAdvantage Element)
         {
             switch(Element)
             {
@@ -207,7 +207,7 @@ namespace CardGame
         /// <summary>
         /// Removes card from list and destroys it
         /// </summary>
-        public void DestroyCard()
+        private void DestroyCard()
         {
             //Todo! Remove card from List
             Health = 0;

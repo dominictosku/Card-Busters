@@ -44,6 +44,7 @@ namespace CardGame.Functions
             List<Cards> deck;
             Cards selectedCard;
             char element, role;
+            // Text for the input field
             string[] selection = new string[4] { "Pyro", "Hydro", "Anemo", "Geo" }, 
                      selection2 = new string[4] { "Attacker", "Healer", "Support", "Tank" };
             string textoutput = "element";
